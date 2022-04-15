@@ -1,4 +1,4 @@
-package com.github.mybatisplus.config.business.no.spring.entity;
+package com.github.mybatisplus.config.entity;
 
 import com.baomidou.mybatisplus.annotation.TableLogic;
 import com.github.mybatisplus.config.business.BusinessId;

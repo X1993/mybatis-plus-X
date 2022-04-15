@@ -1,17 +1,17 @@
-package com.github.mybatisplus.config.business.no.spring;
+package com.github.mybatisplus.config;
 
 import com.baomidou.mybatisplus.core.MybatisConfiguration;
 import com.baomidou.mybatisplus.core.MybatisSqlSessionFactoryBuilder;
 import com.baomidou.mybatisplus.core.toolkit.GlobalConfigUtils;
-import com.github.mybatisplus.config.XSqlInjector;
-import com.github.mybatisplus.config.business.no.spring.entity.Person;
-import com.github.mybatisplus.config.business.no.spring.mapper.PersonMapper;
+import com.github.mybatisplus.config.entity.Person;
+import com.github.mybatisplus.config.mapper.PersonMapper;
 import org.apache.ibatis.logging.stdout.StdOutImpl;
 import org.apache.ibatis.mapping.Environment;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.transaction.TransactionFactory;
 import org.apache.ibatis.transaction.jdbc.JdbcTransactionFactory;
+import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -36,11 +36,13 @@ public class BusinessIdMethodTest {
 
     static Person initPerson;
 
+    static SqlSession session;
+
     @BeforeClass
     public static void init()
     {
         SqlSessionFactory sqlSessionFactory = initSqlSessionFactory();
-        SqlSession session = sqlSessionFactory.openSession(true);
+        session = sqlSessionFactory.openSession(true);
         personMapper = session.getMapper(PersonMapper.class);
 
         Person person = new Person()
@@ -50,6 +52,18 @@ public class BusinessIdMethodTest {
 
         initPerson = personMapper.selectById(person.getId());
         Assert.assertNotNull(initPerson);
+    }
+
+    @AfterClass
+    public static void destory(){
+        Connection connection = session.getConnection();
+        try {
+            Statement statement = connection.createStatement();
+            statement.execute("DROP TABLE person");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        session.close();
     }
 
     @Test

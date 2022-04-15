@@ -154,5 +154,4 @@ public interface XBaseMapper<T> extends BaseMapper<T> {
      */
     List<T> selectBatchBusinessIdsIgnoreLogical(@Param(Constants.COLLECTION) Collection<? extends Serializable> businessIdList);
 
-
 }

@@ -39,7 +39,9 @@ public class XSqlInjector extends DefaultSqlInjector {
                     new SelectBatchByBusinessIds(),
                     new DeleteByBusinessId(),
                     new DeleteBatchByBusinessIds(),
-                    new UpdateByBusinessId()
+                    new UpdateByBusinessId(),
+                    new SelectByBusinessIdIgnoreLogical(),
+                    new SelectBatchByBusinessIdsIgnoreLogical()
             );
         }
         return Collections.EMPTY_LIST;
@@ -55,9 +57,7 @@ public class XSqlInjector extends DefaultSqlInjector {
                 .add(new SelectMapsPageIgnoreLogical())
                 .add(new SelectObjsIgnoreLogical())
                 .add(new SelectOneIgnoreLogical())
-                .add(new SelectPageIgnoreLogical())
-                .add(new SelectByBusinessIdIgnoreLogical())
-                .add(new SelectBatchByBusinessIdsIgnoreLogical());
+                .add(new SelectPageIgnoreLogical());
 
         if (tableInfo.havePK()) {
             builder.add(new SelectByIdIgnoreLogical())
