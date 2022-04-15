@@ -14,7 +14,7 @@ import org.apache.ibatis.scripting.defaults.RawSqlSource;
  * @date 2022/3/4
  * @description
  */
-public class SelectByBusinessId extends AbstractMethod {
+public class SelectByBusinessIdIgnoreLogical extends AbstractMethod {
 
     @Override
     public MappedStatement injectMappedStatement(Class<?> mapperClass,
@@ -23,7 +23,7 @@ public class SelectByBusinessId extends AbstractMethod {
     {
         TableFieldInfo businessIdTableFieldInfo = BusinessIdHelper.getBusinessIdTableFieldInfo(modelClass, tableInfo);
 
-        BusinessIdSqlMethod sqlMethod = BusinessIdSqlMethod.SELECT_BY_BUSINESS_ID;
+        BusinessIdSqlMethod sqlMethod = BusinessIdSqlMethod.SELECT_BY_BUSINESS_ID_IGNORE_LOGICAL;
         SqlSource sqlSource = new RawSqlSource(
                 configuration,
                 String.format(
@@ -31,8 +31,7 @@ public class SelectByBusinessId extends AbstractMethod {
                         sqlSelectColumns(tableInfo, false),
                         tableInfo.getTableName(),
                         businessIdTableFieldInfo.getColumn(),
-                        businessIdTableFieldInfo.getProperty(),
-                        tableInfo.getLogicDeleteSql(true, true)
+                        businessIdTableFieldInfo.getProperty()
                 ), Object.class);
 
         return this.addSelectMappedStatementForTable(mapperClass, sqlMethod.getMethod(), sqlSource, tableInfo);

@@ -9,7 +9,7 @@ import org.apache.ibatis.mapping.MappedStatement;
 import org.apache.ibatis.mapping.SqlSource;
 
 /**
- * @author wangjj7
+ * @author X1993
  * @date 2022/3/7
  * @description
  */
@@ -21,15 +21,15 @@ public class DeleteByBusinessId extends AbstractMethod
         TableFieldInfo businessIdTableFieldInfo = BusinessIdHelper.getBusinessIdTableFieldInfo(modelClass, tableInfo);
 
         String sql;
-        BusinessIdSqlMethod sqlMethod = BusinessIdSqlMethod.LOGIC_DELETE_BY_BUSINESS_ID;
         if (tableInfo.isLogicDelete()) {
+            BusinessIdSqlMethod sqlMethod = BusinessIdSqlMethod.LOGIC_DELETE_BY_BUSINESS_ID;
             sql = String.format(sqlMethod.getSql(), tableInfo.getTableName(), sqlLogicSet(tableInfo),
                     businessIdTableFieldInfo.getColumn(), businessIdTableFieldInfo.getProperty(),
                     tableInfo.getLogicDeleteSql(true, true));
             SqlSource sqlSource = languageDriver.createSqlSource(configuration, sql, Object.class);
             return addUpdateMappedStatement(mapperClass, modelClass, getMethod(sqlMethod), sqlSource);
         } else {
-            sqlMethod = BusinessIdSqlMethod.DELETE_BY__BUSINESS_ID;
+            BusinessIdSqlMethod sqlMethod = BusinessIdSqlMethod.DELETE_BY__BUSINESS_ID;
             sql = String.format(sqlMethod.getSql(), tableInfo.getTableName(), businessIdTableFieldInfo.getColumn(),
                     businessIdTableFieldInfo.getProperty());
             SqlSource sqlSource = languageDriver.createSqlSource(configuration, sql, Object.class);

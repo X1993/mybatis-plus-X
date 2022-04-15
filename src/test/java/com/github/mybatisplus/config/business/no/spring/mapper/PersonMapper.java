@@ -1,6 +1,6 @@
 package com.github.mybatisplus.config.business.no.spring.mapper;
 
-import com.github.mybatisplus.config.business.XBaseMapper;
+import com.github.mybatisplus.config.XBaseMapper;
 import com.github.mybatisplus.config.business.no.spring.entity.Person;
 
 /**

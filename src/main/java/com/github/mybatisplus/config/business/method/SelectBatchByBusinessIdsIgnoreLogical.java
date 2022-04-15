@@ -14,18 +14,17 @@ import org.apache.ibatis.mapping.SqlSource;
  * @date 2022/3/7
  * @description
  */
-public class SelectBatchByBusinessIds extends AbstractMethod {
+public class SelectBatchByBusinessIdsIgnoreLogical extends AbstractMethod {
 
     @Override
     public MappedStatement injectMappedStatement(Class<?> mapperClass, Class<?> modelClass, TableInfo tableInfo) {
         TableFieldInfo businessIdTableFieldInfo = BusinessIdHelper.getBusinessIdTableFieldInfo(modelClass, tableInfo);
 
-        BusinessIdSqlMethod sqlMethod = BusinessIdSqlMethod.SELECT_BATCH_BY_BUSINESS_IDS;
+        BusinessIdSqlMethod sqlMethod = BusinessIdSqlMethod.SELECT_BATCH_BY_BUSINESS_IDS_IGNORE_LOGICAL;
         SqlSource sqlSource = languageDriver.createSqlSource(configuration, String.format(sqlMethod.getSql(),
                 sqlSelectColumns(tableInfo, false), tableInfo.getTableName(),
                 businessIdTableFieldInfo.getColumn(),
-                SqlScriptUtils.convertForeach("#{item}", COLLECTION, null, "item", COMMA),
-                tableInfo.getLogicDeleteSql(true, true)), Object.class);
+                SqlScriptUtils.convertForeach("#{item}", COLLECTION, null, "item", COMMA)), Object.class);
         return addSelectMappedStatementForTable(mapperClass, getMethod(sqlMethod), sqlSource, tableInfo);
     }
 

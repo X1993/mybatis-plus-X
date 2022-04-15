@@ -10,7 +10,7 @@ import org.apache.ibatis.mapping.MappedStatement;
 import org.apache.ibatis.mapping.SqlSource;
 
 /**
- * @author wangjj7
+ * @author X1993
  * @date 2022/3/7
  * @description
  */
@@ -22,8 +22,8 @@ public class DeleteBatchByBusinessIds extends AbstractMethod {
         TableFieldInfo businessIdTableFieldInfo = BusinessIdHelper.getBusinessIdTableFieldInfo(modelClass, tableInfo);
 
         String sql;
-        BusinessIdSqlMethod sqlMethod = BusinessIdSqlMethod.LOGIC_DELETE_BATCH_BY_BUSINESS_IDS;
         if (tableInfo.isLogicDelete()) {
+            BusinessIdSqlMethod sqlMethod = BusinessIdSqlMethod.LOGIC_DELETE_BATCH_BY_BUSINESS_IDS;
             sql = String.format(sqlMethod.getSql(), tableInfo.getTableName(), sqlLogicSet(tableInfo),
                     businessIdTableFieldInfo.getColumn(),
                     SqlScriptUtils.convertForeach("#{item}", COLLECTION, null, "item", COMMA),
@@ -31,7 +31,7 @@ public class DeleteBatchByBusinessIds extends AbstractMethod {
             SqlSource sqlSource = languageDriver.createSqlSource(configuration, sql, Object.class);
             return addUpdateMappedStatement(mapperClass, modelClass, getMethod(sqlMethod), sqlSource);
         } else {
-            sqlMethod = BusinessIdSqlMethod.DELETE_BATCH_BY_BUSINESS_IDS;
+            BusinessIdSqlMethod sqlMethod = BusinessIdSqlMethod.DELETE_BATCH_BY_BUSINESS_IDS;
             sql = String.format(sqlMethod.getSql(), tableInfo.getTableName(), businessIdTableFieldInfo.getColumn(),
                     SqlScriptUtils.convertForeach("#{item}", COLLECTION, null, "item", COMMA));
             SqlSource sqlSource = languageDriver.createSqlSource(configuration, sql, Object.class);

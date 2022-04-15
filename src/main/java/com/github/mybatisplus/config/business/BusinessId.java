@@ -9,7 +9,7 @@ import static java.lang.annotation.ElementType.FIELD;
 
 /**
  * 标记业务id
- * @author wangjj7
+ * @author X1993
  * @date 2022/3/4
  * @description
  * 这个注解本身不具有 {@link com.baomidou.mybatisplus.annotation.TableField}功能

@@ -1,7 +1,7 @@
 package com.github.mybatisplus.config.business;
 
 /**
- * @author wangjj7
+ * @author X1993
  * @date 2022/3/4
  * @description
  */
@@ -35,6 +35,8 @@ public enum BusinessIdSqlMethod {
      */
     SELECT_BY_BUSINESS_ID("selectByBusinessId", "根据业务ID 查询一条数据", "SELECT %s FROM %s WHERE %s=#{%s} %s"),
     SELECT_BATCH_BY_BUSINESS_IDS("selectBatchBusinessIds", "根据业务ID集合，批量查询数据", "<script>SELECT %s FROM %s WHERE %s IN (%s) %s</script>"),
+    SELECT_BY_BUSINESS_ID_IGNORE_LOGICAL("selectByBusinessIdIgnoreLogical", "根据业务ID 查询一条数据", "SELECT %s FROM %s WHERE %s=#{%s}"),
+    SELECT_BATCH_BY_BUSINESS_IDS_IGNORE_LOGICAL("selectBatchBusinessIdsIgnoreLogical", "根据业务ID集合，批量查询数据", "<script>SELECT %s FROM %s WHERE %s IN (%s)</script>"),
     ;
 
     private final String method;
