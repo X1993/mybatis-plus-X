@@ -2,7 +2,6 @@ package com.github.mybatisplus.config.nonLogical;
 
 import com.baomidou.mybatisplus.core.injector.AbstractMethod;
 import com.baomidou.mybatisplus.core.metadata.TableInfo;
-import com.baomidou.mybatisplus.core.toolkit.Assert;
 import com.baomidou.mybatisplus.core.toolkit.sql.SqlScriptUtils;
 
 /**
